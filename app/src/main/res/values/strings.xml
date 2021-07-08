@@ -1,0 +1,157 @@
+<resources>
+    <string name="app_name">Track Me</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="justNow"> just now</string>
+    <string name="aMinuteAgo"> a minute ago</string>
+    <string name="minuteAgo"> minutes ago"</string>
+    <string name="hoursAgo"> hours ago</string>
+    <string name="anHourAgo"> an hour ago</string>
+    <string name="yesterday"> yesterday</string>
+    <string name="daysAgo"> days ago</string>
+    <string name="invalidPhone">Invalid Phone number</string>
+    <string name="phoneReq">Phone number required</string>
+    <string name="noInternet">No internet connection</string>
+    <string name="next">Next</string>
+    <string name="verify_your_phone_number">Verify your phone number</string>
+    <string name="phoneNumber">Phone number</string>
+    <string name="track_me_app_will_send_you_an_sms_to_verify_your_number">Track me app will send you an SMS to verify your number</string>
+    <string name="done">Done</string>
+    <string name="verify">Verify</string>
+    <string name="verCode">Verification code</string>
+    <string name="confirmCode">Confirm code</string>
+    <string name="resend_code">Resend code</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="userName">User name</string>
+    <string name="save">Save</string>
+    <string name="back">Back</string>
+    <string name="searchContact">Search Contact</string>
+    <string name="accountSetUp">Account Setup</string>
+    <string name="enterUserName">Enter your full name</string>
+    <string name="dash">- - - - - -</string>
+    <string name="enter_6_digit_code">Enter the 6 digits code</string>
+    <string name="waiting_to_automatically_detect_an_sms_sent_to">Waiting to automatically detect SMS and verify you</string>
+    <string name="wrong_number">Wrong number</string>
+    <string name="view">View</string>
+    <string name="delete">Delete</string>
+    <string name="shareLocation">Share location</string>
+    <string name="acpt">Accept</string>
+    <string name="dcln">Decline</string>
+    <string name="sendLocation">Send location</string>
+    <string name="take_photo_text">Take a photo</string>
+
+
+
+    <string name="add">Add</string>
+    <string name="preview_description">Image and Video preview will appear here</string>
+    <string name="btn_take_picture">Take Picture</string>
+    <string name="btn_record_video">Record Video</string>
+    <string name="oops">Oops! Failed create </string>
+    <string name="directory"> directory</string>
+    <string name="captureCanceled">Capturing image cancelled</string>
+    <string name="failedToCapture">Sorry! Failed to capture image</string>
+    <string name="uploadingPleaseWait">uploading  please wait…</string>
+    <string name="perRequired">Permissions required!</string>
+    <string name="camPerm">Camera needs few permissions to work properly. Grant them in settings.</string>
+    <string name="goToSettings">Go to Settings</string>
+    <string name="cancel">Cancel</string>
+    <string name="comments">Comments</string>
+    <string name="reportSuccess">report successful</string>
+    <string name="vidRecCanceled">video recording cancelled</string>
+    <string name="sorryVidFailed">Sorry! Failed to record video</string>
+
+    <string name="deleteUser">Delete</string>
+
+    <string name="phoneRequired">phone number might be required for follow up</string>
+    <string name="selectLanguage">Please select language</string>
+    <string name="plsWait">verifying please wait</string>
+
+    <string name="codeShort">code too short</string>
+
+
+    <string name="welcome">Welcome to Dalilu App</string>
+    <string name="welcomeNote">"         <![CDATA[          Thank you creating an account with <b>Dalilu. </b>         Help us fight crime by reporting suspicious activities<br> <br>          <b>Please <b>TAKE NOTE</b> of the following</b>          <ol>         <li><b>When you feel unsafe send your location to at least three of your contacts list</b></li>         <li><b>Always capture a crime , accident and upload it</b></li>         <li><b>To enable a fast crime scene investigation please follow up on comments</b> </li>         <li><b>Report any suspicious / fraudulent account </b></li>         <li><b>Do not be rude, act professional<b></li>         </ol>         <br>         ]]>     "</string>
+    <!--location-->
+
+
+    <string name="permission_rationale">Location permissions are required to locate activities on map
+    </string>
+
+
+    <string name="enterName">Please enter name</string>
+
+    <string name="saveDetails">saving details please wait…</string>
+    <string name="successFull">Successful</string>
+    <string name="continueSetUp">Continue</string>
+    <string name="grantPerm">Grant permission</string>
+    <string name="ok">OK</string>
+
+    <string name="errMsg">Location settings are inadequate, and cannot be </string>
+    <string name="fixIn">fixed here. Fix in Settings.</string>
+    <string name="logOut">Log out</string>
+    <string name="type_your_comments_here">Type your comments here</string>
+    <string name="upload">Upload</string>
+    <string name="reportAct">Report an activity</string>
+
+    <string name="if_you_choose_not_to_provide_a_name_a_random_name_will_be_generated_for_you_as_a_user_name">If you choose not to provide a name a random name will be generated for you as a user name</string>
+
+    <string name="plsSlct">Please select a picture</string>
+    <string name="addingUser">adding user…</string>
+
+    <string-array name="selectLanguage">
+        <item>Please select language</item>
+        <item>English</item>
+        <item>French</item>
+    </string-array>
+    <string name="XCC">Sending location details</string>
+    <string name="sndloc">Send your location</string>
+    <string name="qst">Are you sure you want to send your location details to {0}</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="shLoc"> has shared location </string>
+    <string name="withU">  with you  </string>
+    <string name="urLoc"> Your location  </string>
+    <string name="isShared"> is shared with  </string>
+
+    <string name="frnds">Friends</string>
+    <string name="Pending">Pending</string>
+
+    <string name="cancelRequest">Cancel Request</string>
+
+    <string name="uploadingImage">uploading image please wait…</string>
+    <string name="uploadingVideo">uploading video please wait…</string>
+    <string name="qstCancel">Do you want to stop sharing location details to {0}</string>
+    <string name="cancelloc">Stop sharing location</string>
+    <string name="newReq">New request</string>
+    <string name="requestSentTo">Request sent to</string>
+    <string name="addedUser">user added</string>
+    <string name="xcvv">You will be logged out from this account.Do you want to proceed? </string>
+    <string name="logMeOut">Yes, log me out</string>
+
+    <string name="stpLocSharing">Stop location sharing</string>
+    <string name="stdVoiceRecordind">Started voice recording</string>
+    <string name="rcAud">Recording audio , press stop to upload</string>
+    <string name="dalilu_will_send_an_sms_message_to_verify_your_phone_number">Dalilu will send an SMS message to verify your phone number :</string>
+
+    <string name="launch_activity">Report activity</string>
+    <string name="launch_activity_disabled">Report activity disabled</string>
+    <string name="location_updated">Location Updated: %1$s</string>
+    <string name="locationStoped">Location sharing stopped</string>
+    <string name="updateTime">you can only update user name after 30 days</string>
+    <string name="proCeed">Proceed</string>
+    <string name="ntice">Notice</string>
+    <string name="bfr">Before you proceed ,</string>
+    <string name="tkn"> please note that you can only update your user name {0} after 30 days.</string>
+    <string name="rcd">\nWe recommend you use the random name generated to stay anonymous</string>
+    <string name="orUse"> or use a suitable name that can help friends easily find you.</string>
+    <string name="scDsb">Search disabled</string>
+    <string name="dltUser">Deleting user…</string>
+    <string name="rmUser">Remove user</string>
+    <string name="yesDel">Yes Delete</string>
+    <string name="sure">Are you sure you want to delete </string>
+    <string name="declin">Decline</string>
+    <string name="sureDcl">Are you sure you want to decline </string>
+    <string name="cancelRqst">Are you sure you want to cancel request to </string>
+
+</resources>

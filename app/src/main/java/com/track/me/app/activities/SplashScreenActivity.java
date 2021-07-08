@@ -118,8 +118,8 @@ public class SplashScreenActivity extends AppCompatActivity {
 
 
             } else {
-                //Opens the Phone Auth Activity once the time elapses
-              //  startActivity(new Intent(SplashScreenActivity.this, RegisterPhoneNumberActivity.class));
+                //Opens the login in activity once the time elapses
+                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                 finish();
             }
 

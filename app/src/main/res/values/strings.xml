@@ -11,7 +11,11 @@
     <string name="yesterday"> yesterday</string>
     <string name="daysAgo"> days ago</string>
     <string name="invalidPhone">Invalid Phone number</string>
+    <string name="invalidEmail">Invalid email</string>
     <string name="phoneReq">Phone number required</string>
+    <string name="emailRequired">Email required</string>
+    <string name="passwordTooShort">Password too short</string>
+    <string name="passwordRequired">Password required</string>
     <string name="noInternet">No internet connection</string>
     <string name="next">Next</string>
     <string name="verify_your_phone_number">Verify your phone number</string>
@@ -156,5 +160,6 @@
     <string name="sign_up">Sign up</string>
     <string name="confirm_password">Confirm password</string>
     <string name="login">Login</string>
+    <string name="enter_email">Enter email</string>
 
 </resources>

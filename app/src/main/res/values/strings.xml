@@ -15,6 +15,7 @@
     <string name="phoneReq">Phone number required</string>
     <string name="emailRequired">Email required</string>
     <string name="passwordTooShort">Password too short</string>
+    <string name="passwordDontMatch">Passwords do not match</string>
     <string name="passwordRequired">Password required</string>
     <string name="noInternet">No internet connection</string>
     <string name="next">Next</string>

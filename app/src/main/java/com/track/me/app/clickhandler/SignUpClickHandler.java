@@ -9,11 +9,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.track.me.app.R;
 import com.track.me.app.activities.LoginActivity;
 import com.track.me.app.utils.DisplayViewUI;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -56,16 +64,40 @@ public class SignUpClickHandler {
             mAuth.createUserWithEmailAndPassword(email, password).addOnFailureListener(e -> DisplayViewUI.displayToast(context, "Error " + e.getMessage())).addOnCompleteListener((Activity) context, task -> {
 
                 if (task.isSuccessful()) {
-                    pbLoading.setVisibility(View.GONE);
-                    DisplayViewUI.displayAlertDialogMsg(context, "Account successfully created.\nPlease check your email , verify and log in back!!", "OK", new DialogInterface.OnClickListener() {
+                    final FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                    assert firebaseUser != null;
+                    firebaseUser.sendEmailVerification().addOnCompleteListener((Activity) context, new OnCompleteListener<Void>() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onComplete(@NonNull @NotNull Task<Void> task) {
 
-                            dialog.dismiss();
-                            context.startActivity(new Intent(view.getContext(), LoginActivity.class));
+                            if (task.isSuccessful()) {
+                                pbLoading.setVisibility(View.GONE);
+                                DisplayViewUI.displayAlertDialogMsg(context, "Account successfully created.\nPlease check your email , verify and log in back!!", "OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.dismiss();
+                                        context.startActivity(new Intent(view.getContext(), LoginActivity.class));
+
+                                    }
+                                });
+
+                            } else {
+                                DisplayViewUI.displayToast(context, "Error " + task.getException().getMessage());
+                            }
 
                         }
-                    });
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull @NotNull Exception e) {
+
+                            DisplayViewUI.displayToast(context, "Error " + e.getMessage());
+
+                        }
+                    }).addOnFailureListener(e -> DisplayViewUI.displayToast(context, "Error " + e.getMessage()));
+
+                } else {
+                    DisplayViewUI.displayToast(context, "Error " + task.getException().getMessage());
                 }
 
             });

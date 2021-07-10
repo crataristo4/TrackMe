@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.track.me.app.MainActivity;
 import com.track.me.app.R;
 import com.track.me.app.activities.SignUpActivity;
@@ -23,6 +24,7 @@ public class LogInClickHandler {
 
     Button btnLogin;
     FirebaseAuth mAuth;
+    FirebaseUser mCurrentUser;
     private Context context;
     private TextInputLayout txtEmail;
     private TextInputLayout txtPassword;
@@ -40,6 +42,7 @@ public class LogInClickHandler {
         this.pbLoading = pbLoading;
         this.btnLogin = btnLogin;
         mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
     }
 
     public void gotoSignUp(View view) {
@@ -58,26 +61,28 @@ public class LogInClickHandler {
             pbLoading.setVisibility(View.VISIBLE);
 
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, task -> {
+                if (task.isSuccessful()) {
+                    //if user's email is verified ..push to main
+                    if (mCurrentUser.isEmailVerified()) {
+                        pbLoading.setVisibility(View.GONE);
+                        view.getContext().startActivity(new Intent(context, MainActivity.class));
 
-                //if user's email is verified ..push to main
-                if (Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()) {
-                    pbLoading.setVisibility(View.GONE);
-                    view.getContext().startActivity(new Intent(context, MainActivity.class));
+                    } else { // let user verify email prompt
 
-                } else { // let user verify email prompt
+                        pbLoading.setVisibility(View.GONE);
+                        new AlertDialog.Builder(context)
+                                .setMessage("Your email" + " " + email + " " + "\n" + "is not yet verified" + "\n" + "please  verify to continue")
+                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .create()
+                                .show();
 
-                    pbLoading.setVisibility(View.GONE);
-                    new AlertDialog.Builder(context)
-                            .setMessage("Your email" + " " + email + " " + "\n" + "is not yet verified" + "\n" + "please  verify to continue")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .create()
-                            .show();
 
+                    }
 
                 }
 

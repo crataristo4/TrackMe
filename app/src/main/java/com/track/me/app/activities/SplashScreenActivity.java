@@ -29,7 +29,7 @@ import java.util.concurrent.TimeUnit;
 public class SplashScreenActivity extends AppCompatActivity {
     Intent intent;
     private CollectionReference usersCollectionRef;
-    private String uid, phoneNumber, userName, userPhotoUrl;
+    private String uid, userName, userPhotoUrl;
     private long timeStamp;
     private static final String TAG = "SplashScreenActivity";
 
@@ -55,7 +55,6 @@ public class SplashScreenActivity extends AppCompatActivity {
             if (firebaseUser != null) {
 
                 uid = firebaseUser.getUid();
-                phoneNumber = firebaseUser.getPhoneNumber();
 
                 usersCollectionRef = FirebaseFirestore.getInstance().collection("Users");
 
@@ -69,16 +68,14 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                                 if (task1.isSuccessful()) {
                                     DocumentSnapshot document = task1.getResult();
-                                    if (document != null && document.exists()) {
+                                    if (document.exists()) {
 
                                         userPhotoUrl = Objects.requireNonNull(document.getString("userPhotoUrl"));
                                         userName = Objects.requireNonNull(document.getString("userName"));
-                                        phoneNumber = Objects.requireNonNull(document.getString("phoneNumber"));
                                         timeStamp = (long) Objects.requireNonNull(document.get("timeStamp"));
 
                                         intent = new Intent(SplashScreenActivity.this, MainActivity.class);
                                         intent.putExtra(AppConstants.UID, uid);
-                                        intent.putExtra(AppConstants.PHONE_NUMBER, phoneNumber);
                                         intent.putExtra(AppConstants.USER_NAME, userName);
                                         intent.putExtra(AppConstants.USER_PHOTO_URL, userPhotoUrl);
                                         intent.putExtra(AppConstants.TIMESTAMP, timeStamp);
@@ -92,7 +89,6 @@ public class SplashScreenActivity extends AppCompatActivity {
 
                                         intent = new Intent(SplashScreenActivity.this, FinishAccountSetupActivity.class);
                                         intent.putExtra(AppConstants.UID, uid);
-                                        intent.putExtra(AppConstants.PHONE_NUMBER, phoneNumber);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
 

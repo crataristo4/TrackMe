@@ -44,8 +44,8 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgUploadPhoto"
-                        android:layout_width="@dimen/TwoHundredDp"
-                        android:layout_height="@dimen/TwoHundredDp"
+                        android:layout_width="@dimen/OneFiftyDp"
+                        android:layout_height="@dimen/OneFiftyDp"
                         android:layout_marginTop="16dp"
                         android:src="@drawable/defaultavatar"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -81,10 +81,17 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/eightDp"
-                            android:textColorHint="@color/black"
-                            android:background="@drawable/textinputbackground"
                             app:counterEnabled="true"
                             app:counterMaxLength="10"
+                            android:showDividers="beginning"
+                            android:textColorHint="@color/black"
+                            app:boxBackgroundMode="outline"
+                            app:boxStrokeColor="@color/purple_700"
+                            app:boxStrokeErrorColor="#F44336"
+                            app:errorEnabled="true"
+                            app:errorTextColor="#F44336"
+                            app:hintAnimationEnabled="true"
+                            app:hintEnabled="true"
                             app:helperTextTextColor="@color/white">
 
                             <com.google.android.material.textfield.TextInputEditText

@@ -33,7 +33,7 @@
     <string name="back">Back</string>
     <string name="searchContact">Search Contact</string>
     <string name="accountSetUp">Account Setup</string>
-    <string name="enterUserName">Enter your full name</string>
+    <string name="enterUserName">Enter your name</string>
     <string name="dash">- - - - - -</string>
     <string name="enter_6_digit_code">Enter the 6 digits code</string>
     <string name="waiting_to_automatically_detect_an_sms_sent_to">Waiting to automatically detect SMS and verify you</string>
@@ -74,8 +74,9 @@
     <string name="codeShort">code too short</string>
 
 
-    <string name="welcome">Welcome to Dalilu App</string>
-    <string name="welcomeNote">"         <![CDATA[          Thank you creating an account with <b>Dalilu. </b>         Help us fight crime by reporting suspicious activities<br> <br>          <b>Please <b>TAKE NOTE</b> of the following</b>          <ol>         <li><b>When you feel unsafe send your location to at least three of your contacts list</b></li>         <li><b>Always capture a crime , accident and upload it</b></li>         <li><b>To enable a fast crime scene investigation please follow up on comments</b> </li>         <li><b>Report any suspicious / fraudulent account </b></li>         <li><b>Do not be rude, act professional<b></li>         </ol>         <br>         ]]>     "</string>
+    <string name="welcome">Welcome to Track me App</string>
+    <string name="welcomeNote">"         <![CDATA[          Thank you creating an account with <b>Track me. </b> This app is purposely used to track other users location<br> <br>          <b>Please <b>TAKE NOTE</b> of the following</b>          <ol>         <li><b>The app uses your location</b></li>         <li><b>When you are done completing your profile search for whoever you want to track</b></li>         <li><b>After the person accepts your request , you can start seeing their locations</b> </li> <li><b>Report any suspicious / fraudulent account </b></li>
+    <li><b>Do not be rude, act professional<b></li>         </ol>         <br>         ]]>"</string>
     <!--location-->
 
 
@@ -147,7 +148,7 @@
     <string name="ntice">Notice</string>
     <string name="bfr">Before you proceed ,</string>
     <string name="tkn"> please note that you can only update your user name {0} after 30 days.</string>
-    <string name="rcd">\nWe recommend you use the random name generated to stay anonymous</string>
+    <string name="rcd">\nWe recommend you use the random name generated to stay anonymous </string>
     <string name="orUse"> or use a suitable name that can help friends easily find you.</string>
     <string name="scDsb">Search disabled</string>
     <string name="dltUser">Deleting user…</string>

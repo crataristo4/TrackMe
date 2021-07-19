@@ -53,70 +53,74 @@ public class LogInClickHandler {
 
 
     public void validateInputs(final View view) {
+        try {
+            String email = Objects.requireNonNull(txtEmail.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(txtPassword.getEditText()).getText().toString();
 
-        String email = Objects.requireNonNull(txtEmail.getEditText()).getText().toString();
-        String password = Objects.requireNonNull(txtPassword.getEditText()).getText().toString();
+            if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length() >= 8) {
+                pbLoading.setVisibility(View.VISIBLE);
 
-        if (Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length() >= 8) {
-            pbLoading.setVisibility(View.VISIBLE);
+                mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, task -> {
+                    if (task.isSuccessful()) {
+                        //if user's email is verified ..push to main
+                        if (mCurrentUser.isEmailVerified()) {
+                            pbLoading.setVisibility(View.GONE);
+                            view.getContext().startActivity(new Intent(context, MainActivity.class));
 
-            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, task -> {
-                if (task.isSuccessful()) {
-                    //if user's email is verified ..push to main
-                    if (mCurrentUser.isEmailVerified()) {
-                        pbLoading.setVisibility(View.GONE);
-                        view.getContext().startActivity(new Intent(context, MainActivity.class));
+                        } else { // let user verify email prompt
 
-                    } else { // let user verify email prompt
+                            pbLoading.setVisibility(View.GONE);
+                            new AlertDialog.Builder(context)
+                                    .setMessage("Your email" + " " + email + " " + "\n" + "is not yet verified" + "\n" + "please  verify to continue")
+                                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .create()
+                                    .show();
 
-                        pbLoading.setVisibility(View.GONE);
-                        new AlertDialog.Builder(context)
-                                .setMessage("Your email" + " " + email + " " + "\n" + "is not yet verified" + "\n" + "please  verify to continue")
-                                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                })
-                                .create()
-                                .show();
 
+                        }
 
                     }
 
-                }
+
+                }).addOnFailureListener(e -> DisplayViewUI.displayToast(context, "Error " + e.getMessage()));
 
 
-            }).addOnFailureListener(e -> DisplayViewUI.displayToast(context, "Error " + e.getMessage()));
+            } else {
 
+                pbLoading.setVisibility(View.VISIBLE);
+                txtEmail.setErrorEnabled(false);
+                txtPassword.setErrorEnabled(false);
+            }
 
-        } else {
-
-            pbLoading.setVisibility(View.VISIBLE);
-            txtEmail.setErrorEnabled(false);
-            txtPassword.setErrorEnabled(false);
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                pbLoading.setVisibility(View.GONE);
+                txtEmail.setErrorEnabled(true);
+                txtEmail.setError(context.getResources().getString(R.string.invalidEmail));
+            }
+            if (email.trim().isEmpty()) {
+                pbLoading.setVisibility(View.GONE);
+                txtEmail.setErrorEnabled(true);
+                txtEmail.setError(context.getResources().getString(R.string.emailRequired));
+            }
+            if (password.trim().isEmpty()) {
+                pbLoading.setVisibility(View.GONE);
+                txtPassword.setErrorEnabled(true);
+                txtPassword.setError(context.getResources().getString(R.string.passwordRequired));
+            }
+            if (password.length() < 8) {
+                pbLoading.setVisibility(View.GONE);
+                txtPassword.setErrorEnabled(true);
+                txtPassword.setError(context.getResources().getString(R.string.passwordTooShort));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            pbLoading.setVisibility(View.GONE);
-            txtEmail.setErrorEnabled(true);
-            txtEmail.setError(context.getResources().getString(R.string.invalidEmail));
-        }
-        if (email.trim().isEmpty()) {
-            pbLoading.setVisibility(View.GONE);
-            txtEmail.setErrorEnabled(true);
-            txtEmail.setError(context.getResources().getString(R.string.emailRequired));
-        }
-        if (password.trim().isEmpty()) {
-            pbLoading.setVisibility(View.GONE);
-            txtPassword.setErrorEnabled(true);
-            txtPassword.setError(context.getResources().getString(R.string.passwordRequired));
-        }
-        if (password.length() < 8) {
-            pbLoading.setVisibility(View.GONE);
-            txtPassword.setErrorEnabled(true);
-            txtPassword.setError(context.getResources().getString(R.string.passwordTooShort));
-        }
 
     }
 

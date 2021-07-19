@@ -25,7 +25,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackMe">
-        <activity android:name=".activities.SignUpActivity" />
+        <activity
+            android:name=".activities.SignUpActivity"
+            android:theme="@style/Theme.TrackMe.NoActionBar" />
         <activity
             android:name=".activities.LoginActivity"
             android:theme="@style/Theme.TrackMe.NoActionBar" />

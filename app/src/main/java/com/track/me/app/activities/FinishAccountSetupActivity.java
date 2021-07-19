@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.android.material.textfield.TextInputLayout;
@@ -22,7 +21,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.track.me.app.MainActivity;
 import com.track.me.app.R;
@@ -61,7 +59,7 @@ public class FinishAccountSetupActivity extends AppCompatActivity {
         Intent getUserData = getIntent();
         if (getUserData != null) {
             uid = getUserData.getStringExtra(AppConstants.UID);
-            phoneNumber = getUserData.getStringExtra(AppConstants.PHONE_NUMBER);
+           // phoneNumber = getUserData.getStringExtra(AppConstants.PHONE_NUMBER);
         }
 
         activityFinishAccountSetupBinding.btnSave.setOnClickListener(view -> DisplayViewUI.displayAlertDialogMsg(this,
@@ -172,7 +170,7 @@ public class FinishAccountSetupActivity extends AppCompatActivity {
                 Map<String, Object> accountInfo = new HashMap<>();
                 accountInfo.put("userPhotoUrl", getImageUri);
                 accountInfo.put("userName", finalUserName);
-                accountInfo.put("phoneNumber", phoneNumber);
+                // accountInfo.put("phoneNumber", phoneNumber);
                 accountInfo.put("userId", uid);
                 accountInfo.put("timeStamp", GetTimeAgo.getTimeInMillis());
 
@@ -182,7 +180,7 @@ public class FinishAccountSetupActivity extends AppCompatActivity {
                 DisplayViewUI.displayToast(FinishAccountSetupActivity.this, getString(R.string.successFull));
                 Intent intent = new Intent(FinishAccountSetupActivity.this, MainActivity.class);
                 intent.putExtra(AppConstants.UID, uid);
-                intent.putExtra(AppConstants.PHONE_NUMBER, phoneNumber);
+                // intent.putExtra(AppConstants.PHONE_NUMBER, phoneNumber);
                 intent.putExtra(AppConstants.USER_NAME, finalUserName);
                 intent.putExtra(AppConstants.USER_PHOTO_URL, getImageUri);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -209,7 +207,7 @@ public class FinishAccountSetupActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> {
 
                 WelcomeNoticeBottomSheet welcomeNoticeBottomSheet = new WelcomeNoticeBottomSheet();
-                welcomeNoticeBottomSheet.setCancelable(false);
+                welcomeNoticeBottomSheet.setCancelable(true);
                 welcomeNoticeBottomSheet.show(getSupportFragmentManager(), "welcome");
 
             }, 500);

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -8,9 +10,7 @@
             type="com.track.me.app.clickhandler.SignUpClickHandler" />
     </data>
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -38,6 +38,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
@@ -136,10 +137,9 @@
                     app:errorEnabled="true"
                     app:errorTextColor="#F44336"
                     app:hintAnimationEnabled="true"
-                    app:layout_constraintBottom_toTopOf="@+id/btnSignUp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/progressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/inputPassword"
                     app:passwordToggleEnabled="true"
                     app:passwordToggleTintMode="src_in">
 
@@ -164,18 +164,18 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:layout_marginEnd="32dp"
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/custom_button"
-                    android:text="@string/sign_up"
                     android:onClick="@{signUp::signUp}"
+                    android:text="@string/sign_up"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/progressBar" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -183,15 +183,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|bottom"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.50"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/inputPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/inputConfirmPassword" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

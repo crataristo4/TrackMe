@@ -39,6 +39,7 @@ import com.track.me.app.model.RequestModel;
 import com.track.me.app.utils.DisplayViewUI;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -50,7 +51,7 @@ public class BaseActivity extends AppCompatActivity {
     /**
      * Time when the location was updated represented as a String.
      */
-    public static String knownName, state, country, phoneNumber, address;
+    public static String knownName, state, country, address;
     public static double latitude, longitude;
     private static Object mContext;
     /**
@@ -86,6 +87,7 @@ public class BaseActivity extends AppCompatActivity {
     public static Geocoder geocoder;
     private CollectionReference friendsCollectionReference, locationCollectionReference;
     public static String uid, userName, userPhotoUrl;
+    public static ArrayList<String> friends;
     public static long timeStamp;
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -244,6 +246,7 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         Log.i(TAG, "onRequestPermissionResult");
         if (requestCode == AppConstants.REQUEST_PERMISSIONS_REQUEST_CODE) {
             if (grantResults.length <= 0) {
@@ -426,7 +429,6 @@ public class BaseActivity extends AppCompatActivity {
             if (firebaseUser != null) {
 
                 uid = firebaseUser.getUid();
-                phoneNumber = firebaseUser.getPhoneNumber();
 
                 usersCollectionRef = FirebaseFirestore.getInstance().collection("Users");
 
@@ -440,14 +442,14 @@ public class BaseActivity extends AppCompatActivity {
 
                                 if (task1.isSuccessful()) {
                                     DocumentSnapshot document = task1.getResult();
-                                    if (document != null && document.exists()) {
+                                    if (document.exists()) {
 
                                         userPhotoUrl = Objects.requireNonNull(document.getString("userPhotoUrl"));
                                         userName = Objects.requireNonNull(Objects.requireNonNull(document).getString("userName"));
-                                        //   phoneNumber = Objects.requireNonNull(document.getString("phoneNumber"));
                                         timeStamp = (long) Objects.requireNonNull(document.get("timeStamp"));
+                                        friends = (ArrayList<String>) Objects.requireNonNull(document.get("friends"));
 
-                                        Log.i(TAG, "User details : " + userName + " timestamp" + timeStamp);
+                                        Log.i(TAG, "User details : " + userName + " friends" + friends);
 
                                     }
 

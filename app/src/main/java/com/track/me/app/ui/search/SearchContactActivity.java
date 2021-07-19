@@ -1,4 +1,4 @@
-package com.track.me.app.activities;
+package com.track.me.app.ui.search;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +29,6 @@ import com.track.me.app.databinding.ActivitySearchContactBinding;
 import com.track.me.app.model.RequestModel;
 
 public class SearchContactActivity extends AppCompatActivity {
-    private CollectionReference usersDbReF;
-    private ContactsAdapter adapter;
     ProgressBar progressBar;
     Button btnAdd;
     DatabaseReference requestDbRef;
@@ -38,23 +36,22 @@ public class SearchContactActivity extends AppCompatActivity {
     String receiverPhotoUrl;
     String receiverId;
     String receiverPhoneNumber;
+    private CollectionReference usersDbReF;
+    private ContactsAdapter adapter;
     private long mLastClickTime = 0;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        usersDbReF = FirebaseFirestore.getInstance().collection("Users");
-        requestDbRef = FirebaseDatabase.getInstance().getReference("Friends");
-
-
         ActivitySearchContactBinding activitySearchContactBinding = DataBindingUtil.setContentView(this, R.layout.activity_search_contact);
         progressBar = activitySearchContactBinding.progressLoading;
         activitySearchContactBinding.imgBackBtn.setOnClickListener(view -> onBackPressed());
 
         RecyclerView rv = activitySearchContactBinding.recyclerViewContacts;
         rv.setHasFixedSize(true);
+
+        usersDbReF = FirebaseFirestore.getInstance().collection("Users");
+        requestDbRef = FirebaseDatabase.getInstance().getReference("Friends");
 
         activitySearchContactBinding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -97,7 +94,7 @@ public class SearchContactActivity extends AppCompatActivity {
                     receiverId = adapter.getItem(position).getUserId();
                     receiverName = adapter.getItem(position).getUserName();
                     receiverPhotoUrl = adapter.getItem(position).getUserPhotoUrl();
-                    receiverPhoneNumber = adapter.getItem(position).getPhoneNumber();
+                    // receiverPhoneNumber = adapter.getItem(position).getPhoneNumber();
                     mLastClickTime = SystemClock.elapsedRealtime();
 
 
@@ -105,7 +102,7 @@ public class SearchContactActivity extends AppCompatActivity {
                     bundleFriendDetails.putString(AppConstants.USER_NAME, receiverName);
                     bundleFriendDetails.putString(AppConstants.UID, receiverId);
                     bundleFriendDetails.putString(AppConstants.USER_PHOTO_URL, receiverPhotoUrl);
-                    bundleFriendDetails.putString(AppConstants.PHONE_NUMBER, receiverPhoneNumber);
+                    //  bundleFriendDetails.putString(AppConstants.PHONE_NUMBER, receiverPhoneNumber);
 
                     PopUpAlerter popUpAlerter = new PopUpAlerter();
                     popUpAlerter.setCancelable(false);
@@ -122,20 +119,6 @@ public class SearchContactActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        //  adapter.startListening();
-
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        // adapter.stopListening();
-    }
-
     @Override
     public void onBackPressed() {
         gotoMain();
@@ -145,6 +128,5 @@ public class SearchContactActivity extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
         finishAffinity();
     }
-
 
 }

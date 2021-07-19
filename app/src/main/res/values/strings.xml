@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Track Me</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="title_dashboard">Friends</string>
     <string name="title_notifications">Notifications</string>
     <string name="justNow"> just now</string>
     <string name="aMinuteAgo"> a minute ago</string>

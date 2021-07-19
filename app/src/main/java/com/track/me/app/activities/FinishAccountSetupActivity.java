@@ -33,6 +33,7 @@ import com.track.me.app.utils.GetTimeAgo;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -170,7 +171,7 @@ public class FinishAccountSetupActivity extends AppCompatActivity {
                 Map<String, Object> accountInfo = new HashMap<>();
                 accountInfo.put("userPhotoUrl", getImageUri);
                 accountInfo.put("userName", finalUserName);
-                // accountInfo.put("phoneNumber", phoneNumber);
+                accountInfo.put("friends", new ArrayList<>());
                 accountInfo.put("userId", uid);
                 accountInfo.put("timeStamp", GetTimeAgo.getTimeInMillis());
 

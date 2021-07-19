@@ -3,14 +3,16 @@ package com.track.me.app.model;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 
+import java.util.List;
+
 public class RequestModel extends BaseObservable {
     public String userName, userPhotoUrl, userId;
     public boolean isSharingLocation;
     private String id;
     private String name;
-    private String phoneNumber;
     private String photo;
     private String response;
+    List<String> friends;
 
 
     public RequestModel() {
@@ -65,14 +67,6 @@ public class RequestModel extends BaseObservable {
         this.photo = photo;
     }
 
-    @Bindable
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
 
     @Bindable
     public String getResponse() {
@@ -90,5 +84,14 @@ public class RequestModel extends BaseObservable {
 
     public void setSharingLocation(boolean sharingLocation) {
         isSharingLocation = sharingLocation;
+    }
+
+
+    public List<String> getUFriends() {
+        return friends;
+    }
+
+    public void setUsers(List<String> friends) {
+        this.friends = friends;
     }
 }

@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.fragments.RequestFragment">
+        tools:context=".ui.dashboard.FriendsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/requestRecyclerView"

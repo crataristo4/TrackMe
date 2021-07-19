@@ -1,5 +1,6 @@
 package com.track.me.app.bottomsheets;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -18,12 +19,14 @@ import androidx.fragment.app.DialogFragment;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.track.me.app.R;
 import com.track.me.app.activities.BaseActivity;
 import com.track.me.app.constants.AppConstants;
 import com.track.me.app.databinding.PopUpAlerterBottomSheetBinding;
+import com.track.me.app.utils.DisplayViewUI;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +40,7 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
     private String photoUrl;
     String senderId;
     private AppCompatButton btnAddUser;
-    private CollectionReference friendsCollectionReference;
+    private CollectionReference friendsCollectionReference, userCR;
     ConstraintLayout constraintLayout;
 
     @Override
@@ -66,6 +69,7 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private void initViews() {
         //ProgressDialog progressBar = DisplayViewUI.displayProgress(requireActivity(), getString(R.string.addingUser));
         TextView txtName = popUpAlerterBottomSheetBinding.txtName;
@@ -74,6 +78,7 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
         constraintLayout = popUpAlerterBottomSheetBinding.linearLayout2;
 
         friendsCollectionReference = FirebaseFirestore.getInstance().collection("Friends");
+        userCR = FirebaseFirestore.getInstance().collection("Users");
 
         Bundle getUserDetailsBundle = getArguments();
         if (getUserDetailsBundle != null) {
@@ -81,24 +86,25 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
             name = getUserDetailsBundle.getString(AppConstants.USER_NAME);
             id = getUserDetailsBundle.getString(AppConstants.UID);
             photoUrl = getUserDetailsBundle.getString(AppConstants.USER_PHOTO_URL);
-            phoneNumber = getUserDetailsBundle.getString(AppConstants.PHONE_NUMBER);
+            //  phoneNumber = getUserDetailsBundle.getString(AppConstants.PHONE_NUMBER);
 
             txtName.setText(name);
             Glide.with(requireActivity()).load(photoUrl).into(imgPhoto);
+
 
         }
         //sender details
         String senderName = BaseActivity.userName;
         senderId = BaseActivity.uid;
         String senderPhotoUrl = BaseActivity.userPhotoUrl;
-        String senderPhoneNumber = BaseActivity.phoneNumber;
+        // String senderPhoneNumber = BaseActivity.phoneNumber;
 
         //receiver
         Map<String, Object> from = new HashMap<>();
         from.put("id", senderId);
         from.put("name", senderName);
         from.put("photo", senderPhotoUrl);
-        from.put("phoneNumber", senderPhoneNumber);
+        // from.put("phoneNumber", senderPhoneNumber);
         from.put("response", "received");
         from.put("isSharingLocation", false);
 
@@ -111,19 +117,30 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
         to.put("response", "sent");
         from.put("isSharingLocation", false);
 
-        btnAddUser.setOnClickListener(view -> {
-            try {
-                friendsCollectionReference.document(senderId).collection(senderId).document(id).set(to);
-                friendsCollectionReference.document(id).collection(id).document(senderId).set(from);
-                //  DisplayViewUI.displaySnackBar(constraintLayout,"Request sent to " + name);
-                new Handler().postDelayed(this::dismiss, 2000);
+        if (BaseActivity.friends.contains(id)) {
+            btnAddUser.setText("Added");
+            btnAddUser.setOnClickListener(v -> DisplayViewUI.displayToast(getActivity(), "Already added"));
+        } else {
+            btnAddUser.setOnClickListener(view -> {
+                try {
+                    friendsCollectionReference.document(senderId).collection(senderId).document(id).set(to);
+                    //update user friends list
+                    userCR.document(senderId).update("friends", FieldValue.arrayUnion(id));
+                    userCR.document(id).update("friends", FieldValue.arrayUnion(senderId));
 
-            } catch (Exception e) {
 
-                e.printStackTrace();
-            }
+                    friendsCollectionReference.document(id).collection(id).document(senderId).set(from);
+                    //  DisplayViewUI.displaySnackBar(constraintLayout,"Request sent to " + name);
+                    new Handler().postDelayed(this::dismiss, 2000);
 
-        });
+                } catch (Exception e) {
+
+                    e.printStackTrace();
+                }
+
+            });
+        }
+
 
         popUpAlerterBottomSheetBinding.btnCancel.setOnClickListener(v -> dismiss());
 
@@ -132,74 +149,6 @@ public class PopUpAlerter extends BottomSheetDialogFragment {
         //2. check the senders and receivers node respectively
         //3. check the response and update the UI
         Query query = friendsCollectionReference.document(senderId).collection(senderId);
-
-/*
-        query.addSnapshotListener((value, error) -> {
-
-            assert value != null;
-            for (QueryDocumentSnapshot ds : value) {
-                RequestModel requestModel = ds.toObject(RequestModel.class);
-                String response = requestModel.getResponse();
-
-                switch (response) {
-                    case "sent":
-                        btnAddUser.setTag(R.string.cancelRequest);
-                        btnAddUser.setText(R.string.cancelRequest);
-                        btnAddUser.setTextColor(requireContext().getResources().getColor(R.color.white));
-                        btnAddUser.setBackgroundColor(requireContext().getResources().getColor(R.color.colorRed));
-                        btnAddUser.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_cancel_24), null);
-
-                        if (btnAddUser.getTag().equals(R.string.cancelRequest)) {
-                            btnAddUser.setOnClickListener(view -> {
-                                deleteOrRemoveUser();
-                                Log.i(TAG, "cancelling request");
-
-                            });
-
-
-                        }
-
-                        break;
-                    case "friends":
-//                        DisplayViewUI.displayToast(requireActivity(), response);
-                        btnAddUser.setText(R.string.deleteUser);
-                        btnAddUser.setTag(R.string.deleteUser);
-                        btnAddUser.setTextColor(requireContext().getResources().getColor(R.color.black));
-                        btnAddUser.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete), null);
-                        // Delete user from friends
-                        if (btnAddUser.getTag().equals(R.string.deleteUser)) {
-                            btnAddUser.setOnClickListener(view -> {
-                                deleteOrRemoveUser();
-                                Log.i(TAG, "deleting request");
-
-                            });
-                        }
-
-                        break;
-                    case "received":
-                        // DisplayViewUI.displayToast(requireContext(), response);
-                        Log.i(TAG, "Response: " + response);
-                        btnAddUser.setText(R.string.delete);
-                        btnAddUser.setTag(R.string.delete);
-                        btnAddUser.setTextColor(requireContext().getResources().getColor(R.color.white));
-                        btnAddUser.setCompoundDrawablesWithIntrinsicBounds(null, null, ContextCompat.getDrawable(requireContext(), R.drawable.ic_delete), null);
-                        //  remove request received
-                        //  delete request sent
-                        if (btnAddUser.getTag().equals(R.string.delete)) {
-                            btnAddUser.setOnClickListener(view -> {
-                                deleteOrRemoveUser();
-                                Log.i(TAG, "removing request");
-
-                            });
-                        }
-                        break;
-
-                }
-
-            }
-
-        });
-*/
 
 
     }

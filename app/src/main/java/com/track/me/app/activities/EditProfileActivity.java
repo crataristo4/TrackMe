@@ -70,7 +70,7 @@ public class EditProfileActivity extends BaseActivity {
         userName = BaseActivity.userName;
         userPhotoUrl = BaseActivity.userPhotoUrl;
         uid = BaseActivity.uid;
-        phoneNumber = BaseActivity.phoneNumber;
+       // phoneNumber = BaseActivity.phoneNumber;
         timeStamp = BaseActivity.timeStamp;
 
         Objects.requireNonNull(txtUserName.getEditText()).setText(userName);

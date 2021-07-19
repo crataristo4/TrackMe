@@ -26,6 +26,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackMe">
         <activity
+            android:name=".ui.search.SearchContactActivity"
+            android:theme="@style/Theme.TrackMe.NoActionBar" />
+        <activity
             android:name=".activities.SignUpActivity"
             android:theme="@style/Theme.TrackMe.NoActionBar" />
         <activity

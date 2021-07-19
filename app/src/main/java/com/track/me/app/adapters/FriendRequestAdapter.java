@@ -24,6 +24,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.track.me.app.R;
+import com.track.me.app.activities.BaseActivity;
 import com.track.me.app.databinding.LayoutRequestReceivedBinding;
 import com.track.me.app.model.RequestModel;
 import com.track.me.app.utils.DisplayViewUI;
@@ -75,7 +76,7 @@ public class FriendRequestAdapter extends FirestoreRecyclerAdapter<RequestModel,
         CollectionReference friendsCollectionReference = FirebaseFirestore.getInstance().collection("Friends");
 
         //todo ---
-        String id = "MainActivity.userId";
+        String id = BaseActivity.uid;
         String receiverId = getSnapshots().get(position).getId();
         String name = getSnapshots().get(position).getName();
 

@@ -42,7 +42,6 @@ public class LogInClickHandler {
         this.pbLoading = pbLoading;
         this.btnLogin = btnLogin;
         mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
     }
 
     public void gotoSignUp(View view) {
@@ -63,9 +62,9 @@ public class LogInClickHandler {
                 mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener((Activity) context, task -> {
                     if (task.isSuccessful()) {
                         //if user's email is verified ..push to main
-                        if (mCurrentUser.isEmailVerified()) {
+                        if (Objects.requireNonNull(mAuth.getCurrentUser()).isEmailVerified()) {
                             pbLoading.setVisibility(View.GONE);
-                            view.getContext().startActivity(new Intent(context, MainActivity.class));
+                            view.getContext().startActivity(new Intent(context, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
 
                         } else { // let user verify email prompt
 

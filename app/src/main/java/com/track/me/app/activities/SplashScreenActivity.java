@@ -3,7 +3,6 @@ package com.track.me.app.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 
@@ -23,7 +22,6 @@ import com.track.me.app.databinding.ActivitySplashScreenBinding;
 import com.track.me.app.utils.DisplayViewUI;
 
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -70,20 +68,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                                     DocumentSnapshot document = task1.getResult();
                                     if (document.exists()) {
 
-                                        userPhotoUrl = Objects.requireNonNull(document.getString("userPhotoUrl"));
-                                        userName = Objects.requireNonNull(document.getString("userName"));
-                                        timeStamp = (long) Objects.requireNonNull(document.get("timeStamp"));
 
                                         intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-                                        intent.putExtra(AppConstants.UID, uid);
-                                        intent.putExtra(AppConstants.USER_NAME, userName);
-                                        intent.putExtra(AppConstants.USER_PHOTO_URL, userPhotoUrl);
-                                        intent.putExtra(AppConstants.TIMESTAMP, timeStamp);
 
-                                        String days = String.valueOf(TimeUnit.MILLISECONDS.toDays(timeStamp));
-
-                                        Log.i(TAG, "days--" + days);
-                                        Log.i(TAG, "timestamp--" + timeStamp);
 
                                     } else {
 

@@ -116,14 +116,14 @@ public class UserLocation extends BottomSheetDialogFragment implements OnMapRead
             map.setOnCameraMoveListener(() -> mapZoomLevel = map.getCameraPosition().zoom);
             //  googleMap.clear();
             if (name.equals("You")) {
-                map.addMarker(new MarkerOptions()
+                Objects.requireNonNull(map.addMarker(new MarkerOptions()
                         .title("Your last location shared")
                         .snippet(location)
-                        .position(latLng)).showInfoWindow();
+                        .position(latLng))).showInfoWindow();
             } else {
                 map.addMarker(new MarkerOptions()
                         .title(name + "'s location")
-                        .snippet("at " + location)
+                        .snippet("at " + location == null ? "" : location)
                         .position(latLng)).showInfoWindow();
             }
 

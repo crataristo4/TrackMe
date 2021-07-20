@@ -86,7 +86,7 @@ public class BaseActivity extends AppCompatActivity {
     private Boolean mRequestingLocationUpdates;
     public static Geocoder geocoder;
     private CollectionReference friendsCollectionReference, locationCollectionReference;
-    public static String uid, userName, userPhotoUrl;
+    public static String uid, userName, userPhotoUrl, email;
     public static ArrayList<String> friends;
     public static long timeStamp;
     FirebaseAuth firebaseAuth;
@@ -446,6 +446,7 @@ public class BaseActivity extends AppCompatActivity {
 
                                         userPhotoUrl = Objects.requireNonNull(document.getString("userPhotoUrl"));
                                         userName = Objects.requireNonNull(Objects.requireNonNull(document).getString("userName"));
+                                        email = Objects.requireNonNull(Objects.requireNonNull(document).getString("email"));
                                         timeStamp = (long) Objects.requireNonNull(document.get("timeStamp"));
                                         friends = (ArrayList<String>) Objects.requireNonNull(document.get("friends"));
 

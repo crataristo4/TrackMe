@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Track Me</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDb-sXOxwLUpLB-w6WnPshzDwu3ahRESwE</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Friends</string>
     <string name="title_notifications">Notifications</string>
@@ -163,5 +164,6 @@
     <string name="confirm_password">Confirm password</string>
     <string name="login">Login</string>
     <string name="enter_email">Enter email</string>
+    <string name="email">Email</string>
 
 </resources>

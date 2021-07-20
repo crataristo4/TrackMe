@@ -12,9 +12,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.track.me.app.activities.BaseActivity;
+import com.track.me.app.activities.EditProfileActivity;
+import com.track.me.app.activities.SplashScreenActivity;
 import com.track.me.app.databinding.ActivityMainBinding;
 import com.track.me.app.ui.search.SearchContactActivity;
+import com.track.me.app.utils.DisplayViewUI;
 
 public class MainActivity extends BaseActivity {
 
@@ -56,6 +60,33 @@ public class MainActivity extends BaseActivity {
                 Intent searchIntent = new Intent(getApplicationContext(), SearchContactActivity.class);
 
                 startActivity(searchIntent);
+                break;
+
+            case R.id.menu_logout:
+
+                DisplayViewUI.displayAlertDialog(this,
+                        getString(R.string.logOut), getString(R.string.xcvv),
+                        getString(R.string.logMeOut), getString(R.string.cancel),
+                        (dialogInterface, i) -> {
+                            if (i == -1) {
+
+                                FirebaseAuth.getInstance().signOut();
+                                startActivity(new Intent(this, SplashScreenActivity.class)
+                                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                                finish();
+                            } else if (i == -2) {
+                                dialogInterface.dismiss();
+                            }
+
+
+                        });
+
+                break;
+
+            case R.id.menu_edit_profile:
+
+                startActivity(new Intent(this, EditProfileActivity.class));
+
                 break;
 
 

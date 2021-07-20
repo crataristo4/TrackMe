@@ -22,9 +22,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.theartofdev.edmodo.cropper.CropImage;
-import com.track.me.app.MainActivity;
 import com.track.me.app.R;
-import com.track.me.app.constants.AppConstants;
 import com.track.me.app.databinding.ActivityEditProfileBinding;
 import com.track.me.app.model.AlertItems;
 import com.track.me.app.utils.DisplayViewUI;
@@ -48,7 +46,7 @@ public class EditProfileActivity extends BaseActivity {
     long timeInThirtyDays;
     private CollectionReference usersCollection, alertsCollection;
     private String getImageUri;
-    private String phoneNumber;
+    private String email;
     private String userPhotoUrl;
     private String uid, alertUserId, postId;
     private static final String TAG = "Edit-Profile";
@@ -70,11 +68,11 @@ public class EditProfileActivity extends BaseActivity {
         userName = BaseActivity.userName;
         userPhotoUrl = BaseActivity.userPhotoUrl;
         uid = BaseActivity.uid;
-       // phoneNumber = BaseActivity.phoneNumber;
+        email = BaseActivity.email;
         timeStamp = BaseActivity.timeStamp;
 
         Objects.requireNonNull(txtUserName.getEditText()).setText(userName);
-        Objects.requireNonNull(activityEditProfileBinding.txtPhone.getEditText()).setText(phoneNumber);
+        Objects.requireNonNull(activityEditProfileBinding.txtEmail.getEditText()).setText(email);
 
         runOnUiThread(() -> Glide.with(EditProfileActivity.this)
                 .load(userPhotoUrl)
@@ -352,17 +350,8 @@ public class EditProfileActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        gotoMain();
+        super.onBackPressed();
     }
 
-    void gotoMain() {
-        startActivity(new Intent(this, MainActivity.class)
-                .putExtra(AppConstants.PHONE_NUMBER, phoneNumber)
-                .putExtra(AppConstants.USER_PHOTO_URL, userPhotoUrl)
-                .putExtra(AppConstants.USER_NAME, userName)
-                .putExtra(AppConstants.UID, uid)
-                .putExtra(AppConstants.TIMESTAMP, timeStamp)
-        );
-        finishAffinity();
-    }
+
 }
